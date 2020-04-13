@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,8 +52,18 @@ namespace Makao_game
         /// </summary>
         internal void PlaceOnStack()
         {
-            croupier.PlaceOnStack(ToPlaceOnStack);
-            ToPlaceOnStack.Clear();
+            if (croupier.PlaceOnStack(ToPlaceOnStack) == 1)
+            {
+                ToPlaceOnStack.Clear();
+            }
+            else
+            {
+                foreach (var card in ToPlaceOnStack)
+                {
+                    Hand.Add(card);
+                }
+                ToPlaceOnStack.Clear();
+            }
         }
 
         /// <summary>
@@ -61,18 +72,24 @@ namespace Makao_game
         /// <param name="index"></param>
         internal void AddCardToPrepared(int index)
         {
-            ToPlaceOnStack.Add(Hand[index-1]);
-            Hand.RemoveAt(index - 1);
+            try
+            {
+                ToPlaceOnStack.Add(Hand[index]);
+                Hand.RemoveAt(index);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Inocorrect index!");
+            }
         }
 
-        public void printMyCards()
+        internal void ReturnCardsToHand()
         {
-            Console.WriteLine(sName+" cards:");
-            foreach (var card in Hand)
+            foreach (var card in ToPlaceOnStack)
             {
-                Console.WriteLine(card.eValue + " of " + card.eSuit);
+                Hand.Add(card);
             }
-            Console.WriteLine("/n");
+            ToPlaceOnStack.Clear();
         }
     }
 }

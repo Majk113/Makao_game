@@ -51,12 +51,12 @@ namespace Makao_game
             
         }
 
-        public void PlaceOnStack(List<Card> cardsToPlaceOnStack)
+        public int PlaceOnStack(List<Card> cardsToPlaceOnStack)
         {
             if ((cardsToPlaceOnStack.Count == 2) || (cardsToPlaceOnStack.Count == 0) || (cardsToPlaceOnStack.Count > 4))
             {
                 MessageBox.Show("Incorrect amount of cards!");
-                return;
+                return -1;
             }
 
             foreach (var card in cardsToPlaceOnStack)
@@ -64,7 +64,7 @@ namespace Makao_game
                 if (card.eValue != cardsToPlaceOnStack[0].eValue)
                 {
                     MessageBox.Show("Cards doesn't have same value!");
-                    return;
+                    return -1;
                 }
             }
 
@@ -74,11 +74,17 @@ namespace Makao_game
                 {
                     stackReference.Push(card);
                 }
-                else if(card.eValue == Card.Value.Queen)
+                else if (card.eValue == Card.Value.Queen)
                 {
                     stackReference.Push(card);
                 }
+                else
+                {
+                    MessageBox.Show("Wrong card!");
+                    return -1;
+                }
             }
+            return 1;
         }
 
         public Card TakeCardFromTop()

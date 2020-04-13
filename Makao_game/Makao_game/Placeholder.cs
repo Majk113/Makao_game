@@ -18,6 +18,7 @@ namespace Makao_game
         private List<Player> playerList = new List<Player>();
         private Stack<Card> stack;
         internal Croupier croupier;
+        private Server serw;
 
         public Placeholder()
         {
@@ -31,6 +32,8 @@ namespace Makao_game
 
             croupier.DealBegginingHand();
             croupier.startStack();
+
+            serw = new Server();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -59,27 +62,31 @@ namespace Makao_game
         private void PrintHand(Player player)
         {
             richTextBox1.Clear();
-            richTextBox1.AppendText(player.sName + " cards in hand:");
+            richTextBox1.AppendText(player.sName + " cards in hand:\n");
+            int cardID = 0;
             foreach (var card in player.Hand)
             {
-                richTextBox1.AppendText(card.eValue + " of " + card.eSuit + "\n");
+                richTextBox1.AppendText(cardID+". "+card.eValue + " of " + card.eSuit + "\n");
+                cardID++;
             }
+            richTextBox1.Focus();
         }
 
         private void PrintPrepared(Player player)
         {
             richTextBox2.Clear();
-            richTextBox2.AppendText(player.sName + " cards to be placed:");
+            richTextBox2.AppendText(player.sName + " cards to be placed:\n");
             foreach (var card in player.ToPlaceOnStack)
             {
                 richTextBox2.AppendText(card.eValue + " of " + card.eSuit + "\n");
             }
+            richTextBox1.Focus();
         }
 
         private void PrintStack()
         {
             richTextBox3.Clear();
-            richTextBox3.AppendText("Cards on stack:");
+            richTextBox3.AppendText("Cards on stack:\n");
             foreach (var card in croupier.stackReference)
             {
                 richTextBox3.AppendText(card.eValue + " of " + card.eSuit + "\n");
@@ -93,6 +100,10 @@ namespace Makao_game
             PrintStack();
         }
 
-
+        private void button5_Click(object sender, EventArgs e)
+        {
+            playerList[0].ReturnCardsToHand();
+            UpdateTextBoxes();
+        }
     }
 }
