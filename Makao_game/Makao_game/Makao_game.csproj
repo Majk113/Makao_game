@@ -47,31 +47,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Server.cs" />
     <Compile Include="Croupier.cs" />
-    <Compile Include="Lobby.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Lobby.Designer.cs">
-      <DependentUpon>Lobby.cs</DependentUpon>
-    </Compile>
     <Compile Include="Shuffler.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Placeholder.cs">
+    <Compile Include="Makao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Placeholder.Designer.cs">
-      <DependentUpon>Placeholder.cs</DependentUpon>
+    <Compile Include="Makao.Designer.cs">
+      <DependentUpon>Makao.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Lobby.resx">
-      <DependentUpon>Lobby.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Placeholder.resx">
-      <DependentUpon>Placeholder.cs</DependentUpon>
+    <EmbeddedResource Include="Makao.resx">
+      <DependentUpon>Makao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

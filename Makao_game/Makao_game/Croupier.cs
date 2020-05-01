@@ -13,6 +13,7 @@ namespace Makao_game
         private List<Player> listOfPleyersReference;
         internal Stack<Card> stackReference;
 
+
         public Croupier(ref List<Player> listArg, ref Stack<Card> stackArg)
         {
             deck = new Deck(1);
@@ -61,7 +62,7 @@ namespace Makao_game
 
             foreach (var card in cardsToPlaceOnStack)
             {
-                if (card.eValue != cardsToPlaceOnStack[0].eValue)
+                if (card.Value != cardsToPlaceOnStack[0].Value)
                 {
                     MessageBox.Show("Cards doesn't have same value!");
                     return -1;
@@ -70,11 +71,11 @@ namespace Makao_game
 
             foreach (var card in cardsToPlaceOnStack)
             {
-                if ((card.eSuit == stackReference.Peek().eSuit) || (card.eValue == stackReference.Peek().eValue))
+                if ((card.Suit == stackReference.Peek().Suit) || (card.Value == stackReference.Peek().Value))
                 {
                     stackReference.Push(card);
                 }
-                else if (card.eValue == Card.Value.Queen)
+                else if (card.Value == Card.eValue.Queen)
                 {
                     stackReference.Push(card);
                 }

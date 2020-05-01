@@ -17,9 +17,9 @@ namespace Makao_game
         {
             for (int i = 0; i < howManyDecks; i++)
             {
-                foreach (var suit in (Card.Suit[])Enum.GetValues(typeof(Card.Suit)))
+                foreach (var suit in (Card.eSuit[])Enum.GetValues(typeof(Card.eSuit)))
                 {
-                    foreach (var value in (Card.Value[])Enum.GetValues(typeof(Card.Value)))
+                    foreach (var value in (Card.eValue[])Enum.GetValues(typeof(Card.eValue)))
                     {
 
                         shufflingList.Add(new Card(suit, value));

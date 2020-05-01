@@ -1,6 +1,6 @@
 ﻿namespace Makao_game
 {
-    partial class Placeholder
+    partial class Makao
     {
         /// <summary>
         /// Required designer variable.

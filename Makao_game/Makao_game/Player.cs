@@ -17,11 +17,9 @@ namespace Makao_game
         private Croupier croupier;
         private bool isPaused;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="name">Player's name</param>
-        /// <param name="refArg">Reference to croupier</param>
+        public delegate Card mojDelegatTest(int amount);
+        public mojDelegatTest toJestMojDelegat;
+
         public Player(string name, ref Croupier refArg)
         {
             croupier = refArg;
@@ -29,27 +27,17 @@ namespace Makao_game
             Console.WriteLine("Players name: " + sName);
         }
 
-        /// <summary>
-        /// Internal Method to add card to Hand
-        /// </summary>
-        /// <param name="card"></param>
         internal void AddCard(Card card)
         {
             Hand.Add(card);
         }
 
-        /// <summary>
-        /// Request croupier to give a card
-        /// </summary>
-        /// <param name="amount"></param>
-        internal void GiveMeCard(int amount)
+        internal void PickACard(int amount)
         {
-            croupier.DealCards(amount, this);
+            toJestMojDelegat(amount);
+            //croupier.DealCards(amount, this);
         }
 
-        /// <summary>
-        /// Place cards on stack
-        /// </summary>
         internal void PlaceOnStack()
         {
             if (croupier.PlaceOnStack(ToPlaceOnStack) == 1)
@@ -66,10 +54,6 @@ namespace Makao_game
             }
         }
 
-        /// <summary>
-        /// Adding cards to list which is beeing prepared to place on stack
-        /// </summary>
-        /// <param name="index"></param>
         internal void AddCardToPrepared(int index)
         {
             try

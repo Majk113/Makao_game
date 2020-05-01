@@ -8,29 +8,32 @@ namespace Makao_game
 {
     public class Card
     {
-        public enum Value {Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
-        public enum Suit {Spades, Hearts, Clubs, Diamonds};
+        public enum eValue {Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
+        public enum eSuit { Spades, Hearts, Clubs, Diamonds };
 
-        public readonly Suit eSuit;
-        public readonly Value eValue;
-        public readonly bool isFunctional;
 
-        public Card(Suit sui, Value val)
+        public eSuit Suit { get; private set; }
+        public eValue Value { get; private set; }
+        public bool IsFunctional { get; private set; }
+
+
+
+        public Card(eSuit suit, eValue value)
         {
-            eSuit = sui;
-            eValue = val;
+            Suit = suit;
+            Value = value;
 
-            if ((val == Value.Two) || (val == Value.Three) || (val == Value.Four) || (val == Value.Jack) || (val == Value.Ace))
-            { 
-                isFunctional = true;
-            }
-            else if (((val == Value.Queen) || (val == Value.King)) && ((sui == Suit.Hearts) || (sui == Suit.Spades)))
+            if ((value == eValue.Two) || (value == eValue.Three) || (value == eValue.Four) || (value == eValue.Jack) || (value == eValue.Ace))
             {
-                isFunctional = true;
+                IsFunctional = true;
+            }
+            else if (((value == eValue.Queen) || (value == eValue.King)) && ((suit == eSuit.Hearts) || (suit == eSuit.Spades)))
+            {
+                IsFunctional = true;
             }
             else
             {
-                isFunctional = false;
+                IsFunctional = false;
             }
         }
     }

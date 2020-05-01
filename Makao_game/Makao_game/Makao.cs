@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Makao_game
 {
-    public partial class Placeholder : Form
+    public partial class Makao : Form
     {
         private int howManyPlayers;
         private int whosTurn;
@@ -18,9 +18,8 @@ namespace Makao_game
         private List<Player> playerList = new List<Player>();
         private Stack<Card> stack;
         internal Croupier croupier;
-        private Server serw;
 
-        public Placeholder()
+        public Makao()
         {
             InitializeComponent();
             croupier = new Croupier(ref playerList, ref stack);
@@ -33,7 +32,6 @@ namespace Makao_game
             croupier.DealBegginingHand();
             croupier.startStack();
 
-            serw = new Server();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -49,7 +47,7 @@ namespace Makao_game
 
         private void button2_Click(object sender, EventArgs e)
         {
-            playerList[0].GiveMeCard((int)numericUpDown1.Value);
+            playerList[0].PickACard((int)numericUpDown1.Value);
             UpdateTextBoxes();
         }
 
@@ -66,7 +64,7 @@ namespace Makao_game
             int cardID = 0;
             foreach (var card in player.Hand)
             {
-                richTextBox1.AppendText(cardID+". "+card.eValue + " of " + card.eSuit + "\n");
+                richTextBox1.AppendText(cardID+". " + card.Value + " of " + card.Suit + "\n");
                 cardID++;
             }
             richTextBox1.Focus();
@@ -78,7 +76,7 @@ namespace Makao_game
             richTextBox2.AppendText(player.sName + " cards to be placed:\n");
             foreach (var card in player.ToPlaceOnStack)
             {
-                richTextBox2.AppendText(card.eValue + " of " + card.eSuit + "\n");
+                richTextBox2.AppendText(card.Value + " of " + card.Suit + "\n");
             }
             richTextBox1.Focus();
         }
@@ -89,7 +87,7 @@ namespace Makao_game
             richTextBox3.AppendText("Cards on stack:\n");
             foreach (var card in croupier.stackReference)
             {
-                richTextBox3.AppendText(card.eValue + " of " + card.eSuit + "\n");
+                richTextBox3.AppendText(card.Value + " of " + card.Suit + "\n");
             }
         }
 

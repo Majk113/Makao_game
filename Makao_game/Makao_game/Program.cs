@@ -16,7 +16,7 @@ namespace Makao_game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Placeholder());
+            Application.Run(new Makao());
         }
     }
 }
