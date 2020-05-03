@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Makao_game
+namespace MakaoGameNetLayer
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Makao_game
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Makao());
+            Application.Run(new MakaoGameNetLayer());
         }
     }
 }

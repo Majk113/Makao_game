@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Makao_game")]
+[assembly: AssemblyTitle("Makao_game_serwer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Makao_game")]
+[assembly: AssemblyProduct("Makao_game_serwer")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("99ec534b-fb49-46ce-b0c0-8524585ff3ef")]
+[assembly: Guid("612ee7dc-d21f-4bd2-b25c-0a2ce652187a")]
 
 // Version information for an assembly consists of the following four values:
 //
