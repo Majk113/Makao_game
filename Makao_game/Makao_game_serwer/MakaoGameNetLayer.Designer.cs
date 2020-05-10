@@ -36,6 +36,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.clientNameBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.connectButton = new System.Windows.Forms.Button();
             this.clientPortBox = new System.Windows.Forms.TextBox();
             this.clientIpBox = new System.Windows.Forms.TextBox();
@@ -100,7 +102,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(254, 151);
+            this.tabControl1.Size = new System.Drawing.Size(500, 151);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
@@ -114,13 +116,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(246, 125);
+            this.tabPage1.Size = new System.Drawing.Size(492, 125);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.clientNameBox);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.connectButton);
             this.tabPage2.Controls.Add(this.clientPortBox);
             this.tabPage2.Controls.Add(this.clientIpBox);
@@ -129,10 +133,26 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(246, 125);
+            this.tabPage2.Size = new System.Drawing.Size(492, 125);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Client";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // clientNameBox
+            // 
+            this.clientNameBox.Location = new System.Drawing.Point(259, 23);
+            this.clientNameBox.Name = "clientNameBox";
+            this.clientNameBox.Size = new System.Drawing.Size(227, 20);
+            this.clientNameBox.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(256, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Name";
             // 
             // connectButton
             // 
@@ -242,6 +262,8 @@
         private System.Windows.Forms.RichTextBox chatTextbox;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox toSendBox;
+        private System.Windows.Forms.TextBox clientNameBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MakaoGameNetLayer
 {
     public partial class MakaoGameNetLayer : Form
     {
-        private static MakaoConnections connectionHandle;
+        private RemoteMakaoClient client;
+        private MakaoServer server;
+
+        private bool isClientCreated = false;
 
         public MakaoGameNetLayer()
         {
@@ -21,17 +17,37 @@ namespace MakaoGameNetLayer
 
         private void startServerButton_Click(object sender, EventArgs e)
         {
-            connectionHandle = new MakaoServer(serverIpBox.Text, Int32.Parse(serverPortBox.Text), 4);
+            server = new MakaoServer(serverIpBox.Text, Int32.Parse(serverPortBox.Text), 4);
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            connectionHandle = new MakaoClient(clientIpBox.Text, Int32.Parse(clientPortBox.Text));
+            if (!isClientCreated)
+            {
+                client = new RemoteMakaoClient(clientIpBox.Text, Int32.Parse(clientPortBox.Text));
+                isClientCreated = true;
+                client.SetName(clientNameBox.Text);
+                client.onChatMessage += PrintChatMessage;
+                client.Name = clientNameBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("Already connected!");
+            }
         }
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-            connectionHandle.SendDatagram(toSendBox.Text);
+            client.SendDatagram(toSendBox.Text);
+        }
+
+        private void PrintChatMessage(string name, string message)
+        {
+            Console.WriteLine("In print chat method!");
+            Console.WriteLine(name);
+            Console.WriteLine(message);
+            chatTextbox.AppendText(name + ": " + message + "\n");
+            chatTextbox.Focus();
         }
     }
 }

@@ -52,9 +52,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Message.cs" />
-    <Compile Include="MakaoConnections.cs" />
     <Compile Include="MakaoClient.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="RemoteMakaoClient.cs" />
     <Compile Include="MakaoGameNetLayer.cs">
       <SubType>Form</SubType>
     </Compile>

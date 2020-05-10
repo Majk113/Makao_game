@@ -5,33 +5,35 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Net.Sockets;
 using System.Net;
+using System.Windows.Forms;
 
 namespace MakaoGameNetLayer
 {
-    public class MakaoServer : MakaoConnections
+    public class MakaoServer
     {
         bool isServerListeningForConnections = false;
         bool isServerListeningForMessages = false;
+        bool isServerCreatedInActiveSession = false;
 
         TcpListener serverHandle;
-        List<TcpClient> remoteClientList = new List<TcpClient>();
+        List<MakaoClient> remoteClientList = new List<MakaoClient>();
         NetworkStream stream;
         IPAddress serverIp;
-        //Message msg;
         BinaryFormatter formatter = new BinaryFormatter();
-
-        byte[] message = new byte[256];
 
         public MakaoServer(string ip, int port, int maxClients)
         {
-            serverIp = IPAddress.Parse(ip);
-
-            if (serverHandle == null)
+            try
             {
+                serverIp = IPAddress.Parse(ip);
                 serverHandle = new TcpListener(serverIp, port);
                 serverHandle.Start();
                 Task listenForConnectionsTask = new Task(ListenForNewConnections);
                 listenForConnectionsTask.Start();
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("Server is already running!");
             }
         }
 
@@ -41,41 +43,51 @@ namespace MakaoGameNetLayer
             
             while (isServerListeningForConnections)
             {
-                TcpClient tempClient = serverHandle.AcceptTcpClient();
-                Console.WriteLine("Connected to:");
-                Console.WriteLine(tempClient.Client.RemoteEndPoint);
+                MakaoClient tempClient = new MakaoClient(serverHandle.AcceptTcpClient());
+                Console.WriteLine("Connected with:");
+                Console.WriteLine(tempClient.client.Client.RemoteEndPoint);
 
                 remoteClientList.Add(tempClient);
-
-                Task.Run(() => ListenForMessages(tempClient));
+                Task.Run(() => ListenForMessages(remoteClientList[remoteClientList.Count-1]));
             }
         }
 
-        private void ListenForMessages(TcpClient client)
+        private void ListenForMessages(MakaoClient client)
         {
             isServerListeningForMessages = true;
             byte[] messageBuffer = new byte[256];
 
             while (isServerListeningForMessages)
             {
-                client.GetStream().Read(messageBuffer, 0, messageBuffer.Length);
-                Message msg = formatter.Deserialize(client.GetStream()) as Message;
+                Message msg = formatter.Deserialize(client.client.GetStream()) as Message;
+                switch (msg.type)
+                {
+                    case Message.MessageType.SET_PLAYER_NAME:
+                        client.Name = msg.name;
+                        break;
+                        
+                    case Message.MessageType.CHAT_MESSAGE:
+                        Console.WriteLine("dupa");
 
-                Console.WriteLine(msg);
-                //Console.WriteLine(msg.content);
+                        foreach (var cl in remoteClientList)
+                        {
+                            SendMessage(cl.client.GetStream(), msg);
+                        }
 
-                //Console.WriteLine(Encoding.ASCII.GetString(messageBuffer));
+                        break;
+
+                    default:
+                        Console.WriteLine("Unknown message recieved");
+                        break;
+                }
+
             }
         }
 
-        public void SendDatagram(string data)
+        private void SendMessage(NetworkStream stream, Message msg)
         {
-            byte[] datagram = new byte[256];
-            datagram = Encoding.ASCII.GetBytes(data);
-
-            stream.Write(datagram, 0, datagram.Length);
+            Console.WriteLine("dupa2");
+            formatter.Serialize(stream, msg);
         }
-
-
     }
 }
